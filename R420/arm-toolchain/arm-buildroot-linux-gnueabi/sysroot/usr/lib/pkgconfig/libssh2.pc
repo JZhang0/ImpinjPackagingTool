@@ -1,0 +1,17 @@
+###########################################################################
+# libssh2 installation details
+###########################################################################
+
+prefix=/usr
+exec_prefix=/usr
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libssh2
+URL: https://www.libssh2.org/
+Description: Library for SSH-based communication
+Version: 1.9.0
+Requires.private: libssl libcrypto zlib
+Libs: -L${libdir} -lssh2 -L/home/indu/work/build-system/output/etk_speedwayr_turbo/host/bin/../arm-buildroot-linux-gnueabi/sysroot/usr/lib -lssl -lcrypto 
+Libs.private: -L/home/indu/work/build-system/output/etk_speedwayr_turbo/host/bin/../arm-buildroot-linux-gnueabi/sysroot/usr/lib -lssl -lcrypto 
+Cflags: -I${includedir}

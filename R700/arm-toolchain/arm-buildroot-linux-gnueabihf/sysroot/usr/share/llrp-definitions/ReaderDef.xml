@@ -1,0 +1,13 @@
+<llrpdef xmlns="http://www.llrp.org/ltk/schema/core/encoding/binary/1.0"
+  xmlns:llb="http://www.llrp.org/ltk/schema/core/encoding/binary/1.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:h="http://www.w3.org/1999/xhtml"
+  xmlns:llrpdef="http://www.llrp.org/ltk/schema/core/encoding/binary/1.0"
+  xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="Core/llrp-1x0-def.xml"         parse="xml" xpointer="xpointer(/*/*)"/>
+    <xi:include href="Impinj/Impinjdef.xml"            parse="xml" xpointer="xpointer(/*/*)"/>
+    <xi:include href="Impinj/ImpinjInternalDef.xml"    parse="xml" xpointer="xpointer(/*/*)"/>
+
+</llrpdef>
+

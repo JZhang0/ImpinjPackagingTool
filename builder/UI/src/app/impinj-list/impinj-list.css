@@ -1,0 +1,30 @@
+h2{
+    color: black;
+    text-align: center;
+}
+
+.grid-list{
+    height: 80%;
+    background: linear-gradient(#b49325, #bd9a269c) no-repeat center/6px 100%;
+    
+}
+
+.grid-list{
+    height: 80%;
+    background: linear-gradient(#c43a03b7, #c43a0371) no-repeat center/6px 100%;
+    
+}
+
+file-upload{
+    height: 80%;
+}
+
+.build-button{
+    position: absolute;
+    height: 10%;
+    font-size: 30px;
+    margin: 5px;
+    padding: 10px 60px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);;
+    bottom: 0;
+}

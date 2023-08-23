@@ -1,0 +1,31 @@
+# Note: Buildroot's and Meson's terminologies differ about the meaning
+# of 'build', 'host' and 'target':
+# - Buildroot's 'host' is Meson's 'build'
+# - Buildroot's 'target' is Meson's 'host'
+
+[binaries]
+c = '/mnt/work/output/etk_r700/host/bin/arm-none-linux-gnueabihf-gcc'
+cpp = '/mnt/work/output/etk_r700/host/bin/arm-none-linux-gnueabihf-g++'
+ar = '/mnt/work/output/etk_r700/host/bin/arm-none-linux-gnueabihf-ar'
+strip = '/mnt/work/output/etk_r700/host/bin/arm-none-linux-gnueabihf-strip'
+pkgconfig = '/mnt/work/output/etk_r700/host/bin/pkgconf'
+g-ir-compiler = '/mnt/work/output/etk_r700/host/arm-buildroot-linux-gnueabihf/sysroot/usr/bin/g-ir-compiler'
+g-ir-scanner = '/mnt/work/output/etk_r700/host/arm-buildroot-linux-gnueabihf/sysroot/usr/bin/g-ir-scanner'
+
+[built-in options]
+c_args = ['-D_LARGEFILE_SOURCE', '-D_LARGEFILE64_SOURCE', '-D_FILE_OFFSET_BITS=64', '-O3'@PKG_TARGET_CFLAGS@]
+c_link_args = [@PKG_TARGET_CFLAGS@]
+cpp_args = ['-D_LARGEFILE_SOURCE', '-D_LARGEFILE64_SOURCE', '-D_FILE_OFFSET_BITS=64', '-O3'@PKG_TARGET_CFLAGS@]
+cpp_link_args = [@PKG_TARGET_CFLAGS@]
+
+[properties]
+needs_exe_wrapper = true
+sys_root = '/mnt/work/output/etk_r700/host/arm-buildroot-linux-gnueabihf/sysroot'
+pkg_config_libdir = '/mnt/work/output/etk_r700/host/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/pkgconfig:/mnt/work/output/etk_r700/host/arm-buildroot-linux-gnueabihf/sysroot/usr/share/pkgconfig'
+pkg_config_static = 'false'
+
+[host_machine]
+system = 'linux'
+cpu_family = 'arm'
+cpu = 'cortex-a7'
+endian = 'little'

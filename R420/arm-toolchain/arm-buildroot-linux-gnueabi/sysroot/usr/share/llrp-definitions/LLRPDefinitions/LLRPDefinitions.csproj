@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>LLRPDefinitions</PackageId>
+    <Description>The OCTAL core LLRP definitions.</Description>
+  </PropertyGroup>
+
+  <Import Project="..\Shared\Common.props" />
+
+  <ItemGroup>
+    <Content Include="LLRPDefinitions.props">
+      <PackagePath>build</PackagePath>
+    </Content>
+    <Content Include="..\Core\llrp-1x0-def.xml">
+      <PackagePath>build</PackagePath>
+    </Content>
+  </ItemGroup>
+</Project>

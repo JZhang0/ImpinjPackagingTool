@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ -                                                                           -
+ -                 IMPINJ CONFIDENTIAL AND PROPRIETARY                       -
+ -                                                                           -
+ - This source code is the sole property of Impinj, Inc.  Reproduction or    -
+ - utilization of this source code in whole or in part is forbidden without  -
+ - the prior written consent of Impinj, Inc.                                 -
+ -                                                                           -
+ - (c) Copyright Impinj, Inc. 2007-2022. All rights reserved.                -
+ -                                                                           -
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ -->
+
+<llrpdef
+    xmlns="http://www.llrp.org/ltk/schema/core/encoding/binary/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xsi:schemaLocation="
+       http://www.llrp.org/ltk/schema/core/encoding/binary/1.0
+       http://www.llrp.org/ltk/schema/core/encoding/binary/1.0/llrpdef.xsd">
+
+
+  <vendorDefinition name="Impinj" vendorID="25882" />
+
+  <namespaceDefinition
+    prefix="IpjInt"
+    URI="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.50"
+    schemaLocation="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.50/ImpinjInternal.xsd" />
+
+
+<!-- ############### Internal Impinj Vendor Extensions ############### -->
+
+  <customMessageDefinition      name="IMPINJ_TCS_COMMAND"
+                                vendor="Impinj" subtype="200"
+                                namespace="IpjInt"
+                                responseType="IMPINJ_TCS_RESPONSE">
+    <parameter  repeat="0-1"    type="ImpinjTestReadCmd"/>
+    <parameter  repeat="0-1"    type="ImpinjTestWriteCmd"/>
+    <parameter  repeat="0-1"    type="ImpinjTestCarrierCancellationCmd"/>
+    <parameter  repeat="0-1"    type="ImpinjTestRSSICalibrationCmd"/>
+    <parameter  repeat="0-1"    type="ImpinjTestMicrocontrollerCmd"/>
+    <parameter  repeat="0-1"    type="ImpinjTestRead32Cmd"/>
+    <parameter  repeat="0-1"    type="ImpinjTestWrite32Cmd"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customMessageDefinition>
+
+  <customMessageDefinition      name="IMPINJ_TCS_RESPONSE"
+                                vendor="Impinj" subtype="201"
+                                namespace="IpjInt">
+    <parameter  repeat="1"      type="LLRPStatus"/>
+    <parameter  repeat="0-1"    type="ImpinjTestReadRsp"/>
+    <parameter  repeat="0-1"    type="ImpinjTestWriteRsp"/>
+    <parameter  repeat="0-1"    type="ImpinjTestCarrierCancellationRsp"/>
+    <parameter  repeat="0-1"    type="ImpinjTestRSSICalibrationRsp"/>
+    <parameter  repeat="0-1"    type="ImpinjTestMicrocontrollerRsp"/>
+    <parameter  repeat="0-1"    type="ImpinjTestRead32Rsp"/>
+    <parameter  repeat="0-1"    type="ImpinjTestWrite32Rsp"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customMessageDefinition>
+
+  <customMessageDefinition      name="IMPINJ_FORKLIFT_DEBUG_COMMAND"
+                                vendor="Impinj" subtype="203"
+                                namespace="IpjInt">
+    <choice    repeat="1-N"     type="ImpinjForkliftCommandParameter"/>
+    <parameter repeat="0-N"     type="Custom"/>
+  </customMessageDefinition>
+
+  <customChoiceDefinition       name="ImpinjForkliftCommandParameter"
+                                namespace="IpjInt">
+    <parameter                  type="ImpinjForkliftReadCmd"/>
+    <parameter                  type="ImpinjForkliftWriteCmd"/>
+    <parameter                  type="ImpinjForkliftRawCmd"/>
+  </customChoiceDefinition>
+
+  <customMessageDefinition      name="IMPINJ_FORKLIFT_DEBUG_RESPONSE"
+                                vendor="Impinj" subtype="204"
+                                namespace="IpjInt">
+    <parameter repeat="1"       type="LLRPStatus"/>
+    <choice    repeat="1-N"     type="ImpinjForkliftResponseParameter"/>
+    <parameter repeat="0-N"     type="Custom"/>
+  </customMessageDefinition>
+
+  <customMessageDefinition      name="IMPINJ_SET_ALGO_PARAMS"
+                                vendor="Impinj" subtype="205"
+                                namespace="IpjInt"
+                                responseType="IMPINJ_SET_ALGO_PARAMS_RESPONSE">
+    <field      type="u8"       name="NumberOfParameters"/>
+    <field      type="u32v"     name="ImpinjAlgoParam"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customMessageDefinition>
+
+  <customMessageDefinition      name="IMPINJ_SET_ALGO_PARAMS_RESPONSE"
+                                vendor="Impinj" subtype="206"
+                                namespace="IpjInt">
+    <parameter  repeat="1"      type="LLRPStatus"/>                                
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customMessageDefinition>  
+
+  <customChoiceDefinition       name="ImpinjForkliftResponseParameter"
+                                namespace="IpjInt">
+    <parameter                  type="ImpinjForkliftReadRsp"/>
+    <parameter                  type="ImpinjForkliftWriteRsp"/>
+    <parameter                  type="ImpinjForkliftRawRsp"/>
+  </customChoiceDefinition>
+
+  <customEnumerationDefinition  name="ImpinjTestMemorySpace"
+                                namespace="IpjInt">
+    <!-- Must match the Mach1 MemorySpace codes -->
+    <entry      value="0"       name="Speedway_Classic_DSP_RAM"/>
+    <entry      value="1"       name="Speedway_Classic_DSP_IO"/>
+    <entry      value="2"       name="Speedway_Classic_DSP_Virtual"/>
+
+    <!-- New for Speedway Revolution -->
+    <entry      value="10"      name="Speedway_Revolution_FPGA"/>
+    <entry      value="11"      name="Speedway_Revolution_Calibration_Table"/>
+    <entry      value="12"      name="Speedway_Revolution_Layer1"/>
+    <entry      value="13"      name="Speedway_Revolution_xArray_Calibration_Table"/>
+
+    <!-- New for R700 -->
+    <entry      value="20"      name="R700_FPGA"/>
+  </customEnumerationDefinition>
+
+  <customParameterDefinition    name="ImpinjTestReadCmd"
+                                vendor="Impinj" subtype="1000"
+                                namespace="IpjInt">
+    <field      type="u8"       name="MemorySpace"
+                                enumeration="ImpinjTestMemorySpace"/>
+    <field      type="u32"      name="Address" format="Hex"/>
+    <field      type="u8"       name="Length"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjTestReadRsp"
+                                vendor="Impinj" subtype="1001"
+                                namespace="IpjInt">
+    <field      type="u8"       name="RspStatus"/>
+    <field      type="u8"       name="NtfStatus"/>
+    <field      type="u16v"     name="Data" format="Hex"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjTestWriteCmd"
+                                vendor="Impinj" subtype="1002"
+                                namespace="IpjInt">
+    <field      type="u8"       name="MemorySpace"
+                                enumeration="ImpinjTestMemorySpace"/>
+    <field      type="u32"      name="Address" format="Hex"/>
+    <field      type="u16v"     name="Data" format="Hex"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjTestWriteRsp"
+                                vendor="Impinj" subtype="1003"
+                                namespace="IpjInt">
+    <field      type="u8"       name="RspStatus"/>
+    <field      type="u8"       name="NtfStatus"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customEnumerationDefinition  name="ImpinjContinuousTxMode"
+                                namespace="IpjInt">
+    <entry      value="0"       name="Continuous_Wave"/>
+    <entry      value="1"       name="Random_Modulated_Data"/>
+    <entry      value="2"       name="Singulate_Tags"/>
+    <entry      value="3"       name="Run_Receiver"/>
+    <entry      value="4"       name="Etsi_Burst"/>
+  </customEnumerationDefinition>
+
+  <customParameterDefinition    name="ImpinjTestContinuousTxSpec"
+                                vendor="Impinj" subtype="1004"
+                                namespace="IpjInt">
+    <field      type="u8"       name="ContinuousTxMode"
+                                enumeration="ImpinjContinuousTxMode"/>
+    <field      type="u16"      name="InternalReaderMode"/>
+    <field      type="u16"      name="AntennaID"/>
+    <field      type="u16"      name="ChannelIndex"/>
+    <field      type="u16"      name="TransmitPowerIndex"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+    <allowedIn  repeat="0-1"      type="SpecParameter"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjForkliftReadCmd"
+                                vendor="Impinj" subtype="1005"
+                                namespace="IpjInt">
+    <field      type="u8"       name="Address" format="Hex"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjForkliftReadRsp"
+                                vendor="Impinj" subtype="1006"
+                                namespace="IpjInt">
+    <field      type="u8"       name="CmdStatus"/>
+    <field      type="u8"       name="Data" format="Hex"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjForkliftWriteCmd"
+                                vendor="Impinj" subtype="1007"
+                                namespace="IpjInt">
+    <field      type="u8"       name="Address" format="Hex"/>
+    <field      type="u8"       name="Data" format="Hex"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjForkliftWriteRsp"
+                                vendor="Impinj" subtype="1008"
+                                namespace="IpjInt">
+    <field      type="u8"       name="CmdStatus"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjForkliftRawCmd"
+                                vendor="Impinj" subtype="1009"
+                                namespace="IpjInt">
+    <field      type="u8v"      name="Command" format="Hex"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjForkliftRawRsp"
+                                vendor="Impinj" subtype="1010"
+                                namespace="IpjInt">
+    <field      type="u8"       name="CmdStatus"/>
+    <field      type="u8v"      name="Response" format="Hex"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjTestCarrierCancellationCmd"
+                                vendor="Impinj" subtype="1011"
+                                namespace="IpjInt">
+    <field      type="u16"      name="AntennaID"/>
+    <field      type="u16v"     name="ChannelList"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjTestCarrierCancellationRsp"
+                                vendor="Impinj" subtype="1012"
+                                namespace="IpjInt">
+    <field      type="u16"      name="AntennaID"/>
+    <field      type="u16v"     name="ChannelList"/>
+    <field      type="u16v"     name="ErrorMagnitude"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjTestRSSICalibrationCmd"
+                                vendor="Impinj" subtype="1013"
+                                namespace="IpjInt">
+    <field      type="u16"      name="AntennaID"/>
+    <field      type="u16"      name="ChannelIndex"/>
+    <field      type="u16"      name="InternalReaderMode"/>
+    <field      type="u16"      name="NumberOfSamples"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjTestRSSICalibrationRsp"
+                                vendor="Impinj" subtype="1014"
+                                namespace="IpjInt">
+    <field      type="u16"      name="AntennaID"/>
+    <field      type="u16"      name="ChannelIndex"/>
+    <field      type="u16"      name="InternalReaderMode"/>
+    <field      type="s16v"     name="RSSIValues"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjEnableAccessSpecReport"
+                                vendor="Impinj" subtype="1016"
+                                namespace="IpjInt">
+    <annotation>
+      <documentation>
+      </documentation>
+      <description copyright="Copyright 2011 Impinj Inc.">
+        <h:p>This custom parameter configures additional parameters to be reported via the TagReportData parameter. Each optional parameter individually enables/configures a particular feature. Note that because of how the ROReportSpec parameter is handled (see section 3.1.15), if the optional parameter used to control a particular feature is absent, the feature is considered disabled. See the documentation for the actual parameters for full feature descriptions.</h:p>
+      </description>
+    </annotation>
+    <parameter  repeat="0-1"    type="ImpinjEnableOpSpecTimestamp"/>
+    <parameter  repeat="0-1"    type="ImpinjEnableOpSpecNumRetries"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+    <allowedIn  repeat="0-1"    type="ImpinjTagReportContentSelector"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjEnableOpSpecTimestamp"
+                                vendor="Impinj" subtype="1017"
+                                namespace="IpjInt">
+    <annotation>
+      <documentation>
+      </documentation>
+      <description copyright="Copyright 2011 Impinj Inc.">
+        <h:p>This custom parameter configures the reporting of ImpinjOpSpecTimestamp. If enabled, one ImpinjOpSpecTimestamp parameter is added to the ROReportData for each OpSpec configured.</h:p>
+      </description>
+    </annotation>
+    <field      type="u16"      name="OpSpecTimestampMode"
+                                enumeration="ImpinjOpSpecTimestampMode"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customEnumerationDefinition  name="ImpinjOpSpecTimestampMode"
+                                namespace="IpjInt">
+    <entry     value="0"        name="Disabled"/>
+    <entry     value="1"        name="Enabled"/>
+  </customEnumerationDefinition>
+
+
+  <customParameterDefinition    name="ImpinjEnableOpSpecNumRetries"
+                                vendor="Impinj" subtype="1018"
+                                namespace="IpjInt">
+    <annotation>
+      <documentation>
+      </documentation>
+      <description copyright="Copyright 2011 Impinj Inc.">
+        <h:p>This custom parameter configures the ImpinjOpSpecNumRetries. If enabled, one ImpinjOpSpecNumRetries parameter is added to the ROReportData for each OpSpec configured.</h:p>
+      </description>
+    </annotation>
+    <field      type="u16"      name="OpSpecNumRetriesMode"
+                                enumeration="ImpinjOpSpecNumRetriesMode"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customEnumerationDefinition  name="ImpinjOpSpecNumRetriesMode"
+                                namespace="Impinj">
+    <entry     value="0"        name="Disabled"/>
+    <entry     value="1"        name="Enabled"/>
+  </customEnumerationDefinition>
+
+  <customParameterDefinition    name="ImpinjOpSpecTimestamp"
+                                vendor="Impinj" subtype="1019"
+                                namespace="IpjInt">
+    <annotation>
+      <documentation>
+      </documentation>
+      <description copyright="Copyright 2011 Impinj Inc.">
+        <h:p>This parameter carries the Timestamp information in UTC about when the OpSpec finished execution. If the OpSpec was not executed, the OpSpecExecutionTimestamp shall be reported as 0.</h:p>
+      </description>
+    </annotation>
+    <field     type="u16"   name="OpSpecID"/>
+    <field     type="u64"   name="OpSpecExecutionTimestamp" format="Datetime"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+    <allowedIn  repeat="0-N"    type="TagReportData"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjOpSpecNumRetries"
+                                vendor="Impinj" subtype="1020"
+                                namespace="IpjInt">
+    <annotation>
+      <documentation>
+      </documentation>
+      <description copyright="Copyright 2011 Impinj Inc.">
+        <h:p>This parameter carries the number of retries of the OpSpec.</h:p>
+      </description>
+    </annotation>
+    <field     type="u16"   name="OpSpecID"/>
+    <field     type="u16"   name="OpSpecNumRetries"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+    <allowedIn  repeat="0-N"    type="TagReportData"/>
+  </customParameterDefinition>
+
+  <customEnumerationDefinition  name="ImpinjAISpecStopTriggerType"
+                                namespace="Impinj">
+    <annotation>
+      <documentation /> 
+       <description copyright="Copyright 2011 Impinj Inc.">
+          <h:p>This custom parameter defines a way to stop an AISpec.</h:p> 
+          <h:ul>
+            <h:li><h:p>0: On_demand - Stop when an ImpinjAISpecSwitchCommand parameter is received. When this type is specified the LLRP AISpecStopTriggerType must be NULL, as such the end of the ROSpec stops the AISpec.</h:p></h:li>
+         </h:ul>
+       </description>
+    </annotation>
+    <entry     value="0"     name="On_Demand"/>
+  </customEnumerationDefinition>
+
+
+  <customParameterDefinition name="ImpinjAISpecStopTrigger"
+                             vendor="Impinj"
+                             subtype="1021" 
+                             namespace="IpjInt">
+    <annotation>
+      <documentation /> 
+       <description copyright="Copyright 2011 Impinj Inc.">
+           <h:p>This custom parameter defines a way to stop an AISpec. How it interacts with the LLRP AISpecStopTriggerType depends on the value of TriggerType.</h:p> 
+       </description>
+    </annotation>
+    <field type="u8"  name="TriggerType" 
+                      enumeration="ImpinjAISpecStopTriggerType" /> 
+    <parameter repeat="0-N" type="Custom" /> 
+    <allowedIn repeat="0-1" type="AISpec"/> 
+  </customParameterDefinition>
+
+  <customParameterDefinition name="ImpinjAISpecSwitchCommand"
+                             vendor="Impinj"
+                             subtype="1022" 
+                             namespace="IpjInt">
+    <annotation>
+      <documentation /> 
+       <description copyright="Copyright 2011 Impinj Inc.">
+          <h:p>This custom parameter defines a command to stop the current AISpec and start executing a new AISpec. This parameter shall come in SET_READER_CONFIG all by itself.</h:p> 
+          <h:p>CurrentROSpecID should match the ID of the currently active ROSpec, otherwise the command is ignored and error is returned in SET_READER_CONFIG_RESPONSE.</h:p> 
+          <h:p>CurrentSpecIndex is used to match the SpecIndex of the currently active AISpec if applicable.</h:p> 
+          <h:p>MatchCurrentSpecIndex indicates whether CurrentSpecIndex should match the SpecIndex of the currently active AISPec. If set to TRUE and the SpecIndex does not match, the command is ignored and error is returned in SET_READER_CONFIG_RESPONSE. If set to FALSE, command is applied as long as CurrentROSpecID matches.</h:p> 
+          <h:p>TargetSpecIndex is the SpecIndex of the new AISpec to be started. If such an AISpec does not exist, the command is ignored and error is returned in SET_READER_CONFIG_RESPONSE.</h:p> 
+       </description>
+    </annotation>
+    <field     type="u32"   name="CurrentROSpecID"/>
+    <field     type="u16"   name="CurrentSpecIndex"/>
+    <field     type="u1"    name="MatchCurrentSpecIndex"/>
+    <reserved  bitCount="7"/>
+    <field     type="u16"   name="TargetSpecIndex"/>
+    <parameter repeat="0-N" type="Custom" /> 
+    <allowedIn repeat="0-1" type="SET_READER_CONFIG"/> 
+    <allowedIn repeat="0-1" type="GET_READER_CONFIG_RESPONSE"/>     
+  </customParameterDefinition>
+  
+  <customParameterDefinition name="ImpinjHiddenS1Boost"
+                             vendor="Impinj"
+                             subtype="1023" 
+                             namespace="IpjInt">
+    <annotation>
+      <documentation /> 
+       <description copyright="Copyright 2011 Impinj Inc.">
+        <h:p>This custom parameter instructs the reader to send BoostQuery and BoostSelect commands with session 1 in addition to the current inventory operation.
+        </h:p> 
+       </description>
+    </annotation>
+    <field     type="u1"    name="Enable"/>
+    <reserved  bitCount="7"/>
+    <parameter repeat="0-N" type="Custom" /> 
+    <allowedIn repeat="0-1" type="C1G2InventoryCommand"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition name="ImpinjSilentS1Boost"
+                             vendor="Impinj"
+                             subtype="1024" 
+                             namespace="IpjInt">
+    <annotation>
+      <documentation /> 
+       <description copyright="Copyright 2011 Impinj Inc.">
+        <h:p>This custom parameter instructs the reader to just send BoostQuery command with session 1 without actually doing any inventory.
+        </h:p> 
+       </description>
+    </annotation>
+    <field     type="u1"    name="Enable"/>
+    <reserved  bitCount="7"/>
+    <parameter repeat="0-N" type="Custom" /> 
+    <allowedIn repeat="0-1" type="C1G2InventoryCommand"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition name="ImpinjTagNak"
+                             vendor="Impinj"
+                             subtype="1025"
+                             namespace="IpjInt">
+    <annotation>
+      <documentation /> 
+       <description copyright="Copyright 2011 Impinj Inc.">
+        <h:p>This custom parameter instructs the reader to NAK the inventoried tag. 
+        </h:p> 
+       </description>
+    </annotation>
+    <field     type="u1"    name="Enable"/>
+    <reserved  bitCount="7"/>
+    <parameter repeat="0-N" type="Custom" /> 
+    <allowedIn repeat="0-1" type="C1G2InventoryCommand"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition name="ImpinjAntennaDwellTime"
+                             vendor="Impinj"
+                             subtype="1026"
+                             namespace="IpjInt">
+    <annotation>
+      <documentation /> 
+       <description copyright="Copyright 2011 Impinj Inc.">
+        <h:p>This custom parameter instructs the reader to enforce antenna dwell time for all inventory search modes. DwellTime is in millisec and when set to 0 means no dwell time is enforced.
+        </h:p> 
+       </description>
+    </annotation>
+    <field     type="u16"   name="DwellTime"/>
+    <parameter repeat="0-N" type="Custom"/> 
+    <allowedIn repeat="0-1" type="C1G2InventoryCommand"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjTestMicrocontrollerCmd"
+                                vendor="Impinj" subtype="1034"
+                                namespace="IpjInt">
+    <annotation>
+      <documentation />
+      <description copyright="Copyright 2015 Impinj Inc.">
+        <h:p>This custom parameter is a command string that passes to the xArray or AntennaHub microcontroller.</h:p>
+      </description>
+    </annotation>
+    <field      type="utf8v"    name="MicrocontrollerCmd"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjTestMicrocontrollerRsp"
+                                vendor="Impinj" subtype="1035"
+                                namespace="IpjInt">
+    <annotation>
+      <description copyright="Copyright 2015 Impinj Inc.">
+        <h:p>This custom parameter is a response string from the xArray or AntennaHub microcontroller.</h:p>
+      </description>
+    </annotation>
+    <field      type="utf8v"    name="MicrocontrollerRsp"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="RfOpResponses"
+                                vendor="Impinj" subtype="1036"
+                                namespace="IpjInt">
+    <field      type="u32v"     name="MeasureIntrinsics"/>
+    <field      type="u32v"     name="Read"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+    <allowedIn  repeat="0-1"    type="ImpinjTestCarrierCancellationRsp"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjTestRead32Cmd"
+                                vendor="Impinj" subtype="1037"
+                                namespace="IpjInt">
+    <field      type="u8"       name="MemorySpace"
+                                enumeration="ImpinjTestMemorySpace"/>
+    <field      type="u32"      name="Address" format="Hex"/>
+    <field      type="u8"       name="Length"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjTestRead32Rsp"
+                                vendor="Impinj" subtype="1038"
+                                namespace="IpjInt">
+    <field      type="u8"       name="RspStatus"/>
+    <field      type="u8"       name="NtfStatus"/>
+    <field      type="u32v"     name="Data" format="Hex"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjTestWrite32Cmd"
+                                vendor="Impinj" subtype="1039"
+                                namespace="IpjInt">
+    <field      type="u8"       name="MemorySpace"
+                                enumeration="ImpinjTestMemorySpace"/>
+    <field      type="u32"      name="Address" format="Hex"/>
+    <field      type="u32v"     name="Data" format="Hex"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjTestWrite32Rsp"
+                                vendor="Impinj" subtype="1040"
+                                namespace="IpjInt">
+    <field      type="u8"       name="RspStatus"/>
+    <field      type="u8"       name="NtfStatus"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjTagPopulationEstimationConfiguration"
+                                vendor="Impinj" subtype="1041"
+                                namespace="IpjInt">
+    <annotation>
+      <documentation />
+      <description copyright="Copyright 2021 Impinj Inc.">
+        <h:p>This extension provides low-level control over the individual parameters of</h:p>
+        <h:p>the Tag Population Estimation Algorithm. This extension supplements the</h:p>
+        <h:p>public parameter fields provided to enable the algorithm</h:p>
+        <h:p>(ImpinjEnableTagPopulationEstimationAlgorithm -> TagPopulationEstimationMode)</h:p>
+        <h:p>and to seed the initial state (C1G2SingulationControl -> TagPopulation).</h:p>
+        <h:p>The parameter fields for this internal extension have the following</h:p>
+        <h:p>fixed point representation encodings and valid ranges:</h:p>
+        <h:p>- FilterAdaptationRate, UQ16.16, [0.0 - 1.0]</h:p>
+        <h:p>- PopulationToQMappingScale, UQ16.16, [0.0 - 10.0]</h:p>
+        <h:p>- PopulationToQMappingFloor, UQ8.0, [0 - 15]</h:p>
+        <h:p>Note that this configuration is expected to be defined in the first</h:p>
+        <h:p>space within the AISpec. There is no internal validation checking to ensure</h:p>
+        <h:p>configuration consistency across spaces nor to look for the parameter</h:p>
+        <h:p>definitions in any other space.</h:p>
+      </description>
+    </annotation>
+    <field      type="u32"      name="FilterAdaptationRate"/>
+    <field      type="u32"      name="PopulationToQMappingScale"/>
+    <field      type="u8"       name="PopulationToQMappingFloor"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+    <allowedIn  repeat="0-1"    type="C1G2InventoryCommand"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjESSpec"
+                                vendor="Impinj" subtype="1042"
+                                namespace="Impinj">
+    <annotation>
+      <documentation>
+      </documentation>
+      <description copyright="Copyright 2021 Impinj Inc.">
+        <h:p>This parameter is specified in an ROSpec and specifies environment sensing operation.</h:p>
+        <h:p>Only one ImpinjESSpec may be specified in an ROSpec. When specifed, no other spec parameters can be present in the ROSpec.</h:p>
+        <h:p>EnvironmentSensingMode specifies whether to configure the reader as a Pilot Generator or a Sniffer.</h:p>
+        <h:p>AntennaID specifies the antenna to transmit/receive on. For Gateways, must specify a unique beam and polarization with ImpinjPolarizationControl enabled</h:p>
+        <h:p>ChannelIndex specifies the channel (in the currently selected region) to transmit/receive on.</h:p>
+      </description>
+    </annotation>
+
+    <field      type="u8"       name="EnvironmentSensingMode"
+                                enumeration="ImpinjEnvironmentSensingMode"/>
+    <field      type="u16"      name="AntennaID"/>
+    <field      type="u16"      name="ChannelIndex"/>
+    <parameter  repeat="0-1"    type="ImpinjEnvironmentSensingPilotGeneratorConfig"/>
+    <parameter  repeat="0-1"    type="ImpinjEnvironmentSensingSnifferConfig"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+
+    <allowedIn  repeat="0-1"    type="SpecParameter"/>
+  </customParameterDefinition>
+
+  <customEnumerationDefinition  name="ImpinjEnvironmentSensingMode"
+                                namespace="Impinj">
+    <entry     value="0"        name="PilotGenerator"/>
+    <entry     value="1"        name="Sniffer"/>
+  </customEnumerationDefinition>
+
+  <customParameterDefinition    name="ImpinjEnvironmentSensingPilotGeneratorConfig"
+                                vendor="Impinj" subtype="1043"
+                                namespace="Impinj">
+    <annotation>
+      <documentation>
+      </documentation>
+      <description copyright="Copyright 2021 Impinj Inc.">
+        <h:p>This parameter configures Environment Sensing Pilot Generator operation.</h:p>
+        <h:p>TransmitPower defines the transmit power to be used expressed as an index into the TransmitPowerTable.</h:p>
+        <h:p>TransmitDurationMSec defines the time in milliseconds for which to transmit.</h:p>
+      </description>
+    </annotation>
+    <field      type="u16"      name="TransmitPower"/>
+    <field      type="u8"       name="TransmitDurationMSec"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjEnvironmentSensingSnifferConfig"
+                                vendor="Impinj" subtype="1044"
+                                namespace="Impinj">
+    <annotation>
+      <documentation>
+      </documentation>
+      <description copyright="Copyright 2021 Impinj Inc.">
+        <h:p>This parameter configures Environment Sensing Sniffer operation.</h:p>
+        <h:p>FrequencyOffsets specifies a list of frequency offsets in kHz to perform power spectrum calculations on. Frequency offsets will be rounded to the nearest frequency bin, as determined by the sampling rate.</h:p>
+        <h:p>ReceiveTimeoutMSec specifies the time to wait for a transmit signal to be detected.</h:p>
+      </description>
+    </annotation>
+    <field      type="s32v"     name="FrequencyOffsets"/>
+    <field      type="u16"      name="ReceiveTimeoutMSec"/>
+    <parameter  repeat="0-1"    type="ImpinjSnifferSettingsConfig"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjSnifferSettingsConfig"
+                                vendor="Impinj" subtype="1045"
+                                namespace="Impinj">
+    <annotation>
+      <documentation>
+      </documentation>
+      <description copyright="Copyright 2021 Impinj Inc.">
+        <h:p>This parameter provides expert configuration for Environment Sensing Sniffer operation.</h:p>
+        <h:p>EnableDRMLowPassFilter specifies if DRM Low Pass Filter is enabled.</h:p>
+        <h:p>EnableDRMHighPassFilter specifies if DRM High Pass Filter is enabled.</h:p>
+        <h:p>UseHighGain specifies if receiver should use high gain.</h:p>
+        <h:p>SignalDetectionThresholdCdbm specifies the threshold in cdBm to use for signal detection.</h:p>
+        <h:p>CaptureDurationMSec specifies the time for which to capture receive samples.</h:p>
+      </description>
+    </annotation>
+    <field      type="u1"       name="EnableDRMLowPassFilter"/>
+    <field      type="u1"       name="EnableDRMHighPassFilter"/>
+    <field      type="u1"       name="UseHighGain"/>
+    <reserved bitCount="5"/>
+    <field      type="s16"      name="SignalDetectionThresholdCdbm"/>
+    <field      type="u8"       name="CaptureDurationMSec"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjEnvironmentSensingData"
+                                vendor="Impinj" subtype="1046"
+                                namespace="Impinj">
+    <annotation>
+      <documentation>
+      </documentation>
+      <description copyright="Copyright 2021 Impinj Inc.">
+        <h:p>This custom parameter provides environment sensing data reported by the reader when executing an ESSpec while operating in Sniffer mode.</h:p>
+        <h:p>FrequencyOffsets provides the list of frequency offsets in kHz for which power spectrum calculations are being reported. These offsets may be different from those requested due to rounding to the nearest frequency bin.</h:p>
+        <h:p>PerFrequencyPowerSpectra provides a list of power spectra computed at each of the specified FrequencyOffsets. The values reported are power spectra multiplied by 1000.</h:p>
+      </description>
+    </annotation>
+    <field      type="s32v"     name="FrequencyOffsets"/>
+    <field      type="u32v"     name="PerFrequencyPowerSpectra"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+    <allowedIn  repeat="0-1"    type="RO_ACCESS_REPORT"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition name="ImpinjMultiAckSequenceConfig"
+                             vendor="Impinj" subtype="1047"
+                             namespace="Impinj">
+    <parameter repeat="0-1" type="ImpinjMultiAckTimeSequenceConfig"/>
+    <parameter repeat="0-N" type="Custom"/>
+    <allowedIn repeat="0-1" type="C1G2InventoryCommand"/>
+  </customParameterDefinition>
+
+  <customParameterDefinition    name="ImpinjMultiAckTimeSequenceConfig"
+                                vendor="Impinj" subtype="1048"
+                                namespace="Impinj">
+
+    <field      type="u8"       name="TimeSequenceMode"
+                enumeration="ImpinjMultiAckTimeSequenceMode"/>
+    <field      type="u8"       name="AdditionalAcksPerSequence"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+  </customParameterDefinition>
+
+  <customEnumerationDefinition  name="ImpinjMultiAckTimeSequenceMode"
+                                namespace="Impinj">
+    <entry     value="0"        name="Disabled"/>
+    <entry     value="1"        name="Enabled"/>
+  </customEnumerationDefinition>
+
+  <customParameterDefinition    name="ImpinjMultiAckSequenceReportData"
+                                vendor="Impinj" subtype="1049"
+                                namespace="Impinj">
+    <annotation>
+        <documentation>
+        </documentation>
+        <description copyright="Copyright 2021 Impinj Inc.">
+            <h:p>This parameter represents a single response from a tag during a MultiAckSequence.</h:p>
+            <h:p>The TimeStampUTC field contains the time stamp of the  event.</h:p>
+            <h:p>There is an antenna and channel index included.</h:p>
+            <h:p>There are three phase values, a 12 bit initial, 12 bit final, and a 16 bit average phase.</h:p>
+            <h:p>There is also an RSSI included for each response.</h:p>
+        </description>
+    </annotation>
+
+    <field      type="u64"      name="TimestampUTC"/>
+    <field      type="u8"       name="AntennaID"/>
+    <field      type="u8"       name="ChannelIndex"/>
+    <field      type="u16"      name="PhaseAngleInitial"/>
+    <field      type="u16"      name="PhaseAngleFinal"/>
+    <field      type="u16"      name="PhaseAngleAvg"/>
+    <field      type="s16"      name="RSSI"/>
+    <parameter  repeat="0-N"    type="Custom"/>
+    <allowedIn  repeat="0-N"    type="ImpinjExtendedTagInformation"/>
+  </customParameterDefinition>
+
+</llrpdef>

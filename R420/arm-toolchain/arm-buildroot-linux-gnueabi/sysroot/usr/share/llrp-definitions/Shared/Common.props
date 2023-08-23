@@ -1,0 +1,22 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>impinj</Authors>
+    <Owners>impinj</Owners>    
+    <Copyright>Copyright 2017</Copyright>
+    <Tags>llrp</Tags>
+    <DevelopmentDependency>true</DevelopmentDependency>
+  </PropertyGroup>
+
+  <!-- This ItemGroup is needed until XslTransformation is included in msbuild for .net core -->
+
+  <Target Name="GetVersion" BeforeTargets="BeforeBuild">
+    <XmlPeek XmlInputPath="..\pom.xml" Query="/*[local-name()='project']/*[local-name()='version']/text()">
+      <Output TaskParameter="Result" PropertyName="Version"/>
+      <Output TaskParameter="Result" PropertyName="PackageVersion"/>
+    </XmlPeek>
+  </Target>
+
+
+</Project>

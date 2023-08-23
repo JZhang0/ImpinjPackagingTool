@@ -1,0 +1,11 @@
+prefix=/mnt/work/output/etk_r700/host
+exec_prefix=/mnt/work/output/etk_r700/host
+libdir=/mnt/work/output/etk_r700/host/lib
+includedir=/mnt/work/output/etk_r700/host/include
+
+Name: fdisk
+Description: fdisk library
+Version: 2.36.2
+Requires.private: uuid blkid
+Cflags: -I${includedir}/libfdisk
+Libs: -L${libdir} -lfdisk

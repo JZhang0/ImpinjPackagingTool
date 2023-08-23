@@ -1,0 +1,10 @@
+prefix=/home/indu/work/build-system/output/etk_speedwayr_turbo/host
+exec_prefix=/home/indu/work/build-system/output/etk_speedwayr_turbo/host
+libdir=/home/indu/work/build-system/output/etk_speedwayr_turbo/host/lib
+includedir=/home/indu/work/build-system/output/etk_speedwayr_turbo/host/include
+
+Name: blkid
+Description: Block device id library
+Version: 2.35.1
+Cflags: -I${includedir}/blkid
+Libs: -L${libdir} -lblkid

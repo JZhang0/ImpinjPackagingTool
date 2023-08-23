@@ -1,0 +1,7 @@
+<div class="top-bar">
+  <h1 style="color: white; margin: 0;">Impinj Packaging Builder</h1>
+</div>
+
+<h2 *ngIf="isBeingUsed == true">The service is being used by another user. Please try again later!</h2>
+
+<impinj-list *ngIf="isBeingUsed == false"></impinj-list>

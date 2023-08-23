@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+ <Impinj:IMPINJ_SAVE_SETTINGS
+   xmlns="http://www.llrp.org/ltk/schema/core/encoding/xml/1.0"
+   xmlns:llrp="http://www.llrp.org/ltk/schema/core/encoding/xml/1.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+   xmlns:Impinj="http://developer.impinj.com/ltk/schema/encoding/xml/1.50"
+  xsi:schemaLocation="http://www.llrp.org/ltk/schema/core/encoding/xml/1.0 http://www.llrp.org/ltk/schema/core/encoding/xml/1.0/llrp.xsd http://developer.impinj.com/ltk/schema/encoding/xml/1.50 http://developer.impinj.com/ltk/schema/encoding/xml/1.50/impinj.xsd" 
+ MessageID="2">
+   <Impinj:SaveConfiguration>true</Impinj:SaveConfiguration>
+</Impinj:IMPINJ_SAVE_SETTINGS>
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- this maps from our public ID to an internal file location so we validate using our newest stuff -->
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+	<system publicId="http://www.llrp.org/ltk/schema/core/encoding/binary/1.0" systemId="http://www.llrp.org/ltk/schema/core/encoding/binary/1.0/llrpdef.xsd" uri="./llrpdef.xsd"/>
+	<system publicId="http://www.llrp.org/ltk/schema/core/encoding/xml/1.0" systemId="http://www.llrp.org/ltk/schema/core/encoding/xml/1.0/llrp.xsd" uri="./Core/llrp-1x0.xsd"/>
+	<system publicId="http://developer.impinj.com/ltk/schema/encoding/xml/1.2" systemId="http://developer.impinj.com/ltk/schema/encoding/xml/1.2/impinj.xsd" uri="./target/generated/Impinj.xsd"/>
+	<system publicId="http://developer.impinj.com/ltk/schema/encoding/xml/1.4" systemId="http://developer.impinj.com/ltk/schema/encoding/xml/1.4/impinj.xsd" uri="./target/generated/Impinj.xsd"/>
+	<system publicId="http://developer.impinj.com/ltk/schema/encoding/xml/1.6" systemId="http://developer.impinj.com/ltk/schema/encoding/xml/1.6/impinj.xsd" uri="./target/generated/Impinj.xsd"/>
+	<system publicId="http://developer.impinj.com/ltk/schema/encoding/xml/1.8" systemId="http://developer.impinj.com/ltk/schema/encoding/xml/1.8/impinj.xsd" uri="./target/generated/Impinj.xsd"/>
+	<system publicId="http://developer.impinj.com/ltk/schema/encoding/xml/1.10" systemId="http://developer.impinj.com/ltk/schema/encoding/xml/1.10/impinj.xsd" uri="./target/generated/Impinj.xsd"/>
+	<system publicId="http://developer.impinj.com/ltk/schema/encoding/xml/1.12" systemId="http://developer.impinj.com/ltk/schema/encoding/xml/1.12/impinj.xsd" uri="./target/generated/Impinj.xsd"/>
+	<system publicId="http://developer.impinj.com/ltk/schema/encoding/xml/1.14" systemId="http://developer.impinj.com/ltk/schema/encoding/xml/1.14/impinj.xsd" uri="./target/generated/Impinj.xsd"/>
+	<system publicId="http://developer.impinj.com/ltk/schema/encoding/xml/1.16" systemId="http://developer.impinj.com/ltk/schema/encoding/xml/1.16/impinj.xsd" uri="./target/generated/Impinj.xsd"/>
+	<system publicId="http://developer.impinj.com/ltk/schema/encoding/xml/1.18" systemId="http://developer.impinj.com/ltk/schema/encoding/xml/1.18/impinj.xsd" uri="./target/generated/Impinj.xsd"/>
+	<system publicId="http://developer.impinj.com/ltk/schema/encoding/xml/1.24" systemId="http://developer.impinj.com/ltk/schema/encoding/xml/1.24/impinj.xsd" uri="./target/generated/Impinj.xsd"/>
+	<system publicId="http://developer.impinj.com/ltk/schema/encoding/xml/1.50" systemId="http://developer.impinj.com/ltk/schema/encoding/xml/1.50/impinj.xsd" uri="./target/generated/Impinj.xsd"/>
+	<system publicId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.2" systemId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.2/impinjinternal.xsd" uri="./target/generated/ImpinjInternal.xsd"/>
+	<system publicId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.4" systemId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.4/impinjinternal.xsd" uri="./target/generated/ImpinjInternal.xsd"/>
+	<system publicId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.6" systemId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.6/impinjinternal.xsd" uri="./target/generated/ImpinjInternal.xsd"/>
+	<system publicId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.8" systemId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.8/impinjinternal.xsd" uri="./target/generated/ImpinjInternal.xsd"/>
+	<system publicId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.10" systemId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.10/impinjinternal.xsd" uri="./target/generated/ImpinjInternal.xsd"/>
+	<system publicId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.12" systemId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.12/impinjinternal.xsd" uri="./target/generated/ImpinjInternal.xsd"/>
+	<system publicId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.14" systemId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.14/impinjinternal.xsd" uri="./target/generated/ImpinjInternal.xsd"/>
+	<system publicId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.16" systemId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.16/impinjinternal.xsd" uri="./target/generated/ImpinjInternal.xsd"/>
+	<system publicId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.18" systemId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.18/impinjinternal.xsd" uri="./target/generated/ImpinjInternal.xsd"/>
+	<system publicId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.24" systemId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.24/impinjinternal.xsd" uri="./target/generated/ImpinjInternal.xsd"/>
+	<system publicId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.50" systemId="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.50/impinjinternal.xsd" uri="./target/generated/ImpinjInternal.xsd"/>
+</catalog>

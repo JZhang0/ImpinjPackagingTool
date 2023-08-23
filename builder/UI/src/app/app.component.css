@@ -1,0 +1,9 @@
+.top-bar {
+    width: 100%;
+    height: 10vh;
+    background-color: #C43A03;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

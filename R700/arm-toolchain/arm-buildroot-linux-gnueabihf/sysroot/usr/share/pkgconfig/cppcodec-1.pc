@@ -1,0 +1,7 @@
+includedir=/usr/include
+
+Name: cppcodec
+Description: C++ header-only library to encode/decode base64, base64url, base32, base32hex and hex
+URL: https://github.com/tplgy/cppcodec
+Version: 0.1
+Cflags: -I${includedir}

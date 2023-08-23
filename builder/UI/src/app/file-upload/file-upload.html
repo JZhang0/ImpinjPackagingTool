@@ -1,0 +1,77 @@
+<input type="file" class="file-input"
+      (change)="onFileSelected($event)" 
+      onclick="this.value = null;" #fileUpload multiple>
+      
+
+<div class="file-upload">
+  <mat-card class="mat-card-setting">
+    <mat-card-header>
+      <mat-card-title>Agent Builder Configurations: </mat-card-title>
+      <mat-card-subtitle *ngIf="deviceType == 'r420'"><b>Note: </b>Impinj R420 uses <b>FTP</b> with username <b>"root"</b> and password <b>"impinj"</b>. </mat-card-subtitle>
+      <mat-card-subtitle *ngIf="deviceType == 'r700'"><b>Note: </b>Impinj R700 uses <b>sFTP</b> with username <b>"sftp"</b> and password <b>"impinj"</b>. </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+
+      <section class="settings-section">
+        <label class="ftp-setting">Settings: </label>
+        <form class="building-options" [formGroup]="formGroup">
+          <mat-slide-toggle formControlName="enableFTP" *ngIf="deviceType == 'r420'" color="warn">Enable FTP</mat-slide-toggle>
+          <mat-slide-toggle formControlName="enableRShell" color="warn"
+                            (change)="formGroup.patchValue({RShellPassword: ''})">
+            Enable RShell
+          </mat-slide-toggle>
+        
+          <div style="margin-top: 10px;">
+            <mat-form-field class="RShell-password" color="warn" floatLabel="always">
+              <mat-label>Enter Rshell Password</mat-label>
+              <input matInput type="password" 
+                    maxlength="15"
+                    formControlName="RShellPassword"
+                    [readonly]="!formGroup.controls['enableRShell'].value"
+                    onchange="formGroup.patchValue({RShellPassword: this.value})">
+              <button matSuffix mat-icon-button aria-label="Clear" (click)="formGroup.patchValue({RShellPassword: ''})">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+        </form>
+      </section>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="mat-card-upload">
+    <mat-card-header>
+      <mat-card-title>UPGX Package Files Upload: </mat-card-title>
+      <mat-card-subtitle>Only files named <b>app</b> and <b>config.ini / Config.ini</b> will be accepted!</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+
+      <div class="file-upload-div">
+        {{fileName || "No file uploaded yet - Please upload both files"}}
+
+        <button class="btn-upload"
+          (click)="fileUpload.click(); ">
+          Upload files
+        </button>
+      </div>
+
+      <h2 class="progress-h2">Progress</h2>
+  
+      <section class="progress-section">
+        <mat-progress-bar
+          class="progress-bar"
+          mode="determinate"
+          color="warn"
+          [value]="uploadProgress">
+        </mat-progress-bar>
+      </section>
+  
+      <button class="btn-cancel" 
+        (click)="clearUpload()">
+        cancel
+      </button>
+  
+    </mat-card-content>
+  </mat-card>
+
+</div>

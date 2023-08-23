@@ -1,0 +1,40 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <UsingTask TaskName="XslTransformation.XslTransformation" 
+    AssemblyFile="..\tools\XslTransformation.dll" 
+    Condition="'$(MSBuildRuntimeType)' == 'Core'" />
+
+  <ItemGroup>
+    <AvailableItemName Include="LLRPTransform" />
+  </ItemGroup>
+
+  <!-- For some reason, XslTransformation's XmlInputPaths was not taking ItemGroup as parameters. So instead I'm passing in a property variable
+       that is a concated string. -->
+  <PropertyGroup>
+    <LLRPXmlInputs>@(LLRPXmlInputs->'%(FullPath)', '; ')</LLRPXmlInputs>
+  </PropertyGroup>
+  
+  <Target Name="LLRPTransform" BeforeTargets="BeforeCompile" Inputs="@(LLRPTransform); @(AdditionalLLRPXsltInputs)" Outputs="@(LLRPTransform -> '%(Filename).cs')">
+    <XslTransformation Condition="!Exists('@(Generate -&gt; \'%(filename).cs\')')"
+                       XmlInputPaths="$(LLRPXmlInputs)" XslInputPath="%(LLRPTransform.Identity)" OutputPaths="@(LLRPTransform -> '%(Filename).cs')" 
+                       ContinueOnError="WarnAndContinue" />
+    <ItemGroup>
+      <Compile Include="@(LLRPTransform -> '%(Filename).cs')"/>
+    </ItemGroup>
+  </Target>
+  
+  <Target Name="RemoveDuplicates" AfterTargets="LLRPTransform">
+    <RemoveDuplicates Inputs="@(Compile)">
+      <Output TaskParameter="Filtered" ItemName="FilteredCompileItems" />
+    </RemoveDuplicates>
+    <ItemGroup>
+      <Compile Remove="@(Compile)" />
+      <Compile Include="@(FilteredCompileItems)" />
+    </ItemGroup>
+  </Target>
+  
+  <Target Name="CleanLLRPTransform" BeforeTargets="Clean">
+    <Delete Files="@(LLRPTransform -> '%(Filename).cs')" />
+  </Target>
+
+</Project>

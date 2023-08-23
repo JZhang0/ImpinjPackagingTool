@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>This project is required until XslTransformation is enabled in msbuild for .net core.</Description>
+    <IsTool>true</IsTool>
+    <DevelopmentDependency>true</DevelopmentDependency>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Framework" Version="16.0.461" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.0.461" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="XslTransformation.targets">
+      <!-- NuGet requires .targets files to match the NuGet package name in order to work. -->
+      <PackagePath>build\XslTransformation.targets</PackagePath>
+    </Content>
+  </ItemGroup>
+
+</Project>

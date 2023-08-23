@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- THis only works when you add the ImpinjSubRegulatoryRegion to the base/root of the schema-->
+ <Impinj:ImpinjSubRegulatoryRegion
+   xmlns="http://developer.impinj.com/ltk/schema/encoding/xml/1.46"
+   xmlns:llrp="http://www.llrp.org/ltk/schema/core/encoding/xml/1.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+   xmlns:Impinj="http://developer.impinj.com/ltk/schema/encoding/xml/1.46"
+  xsi:schemaLocation="http://www.llrp.org/ltk/schema/core/encoding/xml/1.0 http://www.llrp.org/ltk/schema/core/encoding/xml/1.0/llrp.xsd http://developer.impinj.com/ltk/schema/encoding/xml/1.46 http://developer.impinj.com/ltk/schema/encoding/xml/1.46/impinj.xsd" 
+>
+   <RegulatoryRegion>FCC_Part_15_247</RegulatoryRegion>
+</Impinj:ImpinjSubRegulatoryRegion>
+

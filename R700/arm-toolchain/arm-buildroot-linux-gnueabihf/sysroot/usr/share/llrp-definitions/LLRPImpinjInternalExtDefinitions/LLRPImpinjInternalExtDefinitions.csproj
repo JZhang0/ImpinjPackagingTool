@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>LLRPImpinjInternalExtDefinitions</PackageId>
+    <Description>The OCTAL Impinj Internal LLRP extension definitions.</Description>
+  </PropertyGroup>
+
+  <Import Project="..\Shared\Common.props" />
+
+  <ItemGroup>
+    <Content Include="LLRPImpinjInternalExtDefinitions.props">
+      <PackagePath>build</PackagePath>
+    </Content>
+    <Content Include="..\Impinj.com\ImpinjInternalDef.xml">
+      <PackagePath>build</PackagePath>
+    </Content>
+  </ItemGroup>
+</Project>

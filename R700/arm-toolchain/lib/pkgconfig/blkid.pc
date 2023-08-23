@@ -1,0 +1,10 @@
+prefix=/mnt/work/output/etk_r700/host
+exec_prefix=/mnt/work/output/etk_r700/host
+libdir=/mnt/work/output/etk_r700/host/lib
+includedir=/mnt/work/output/etk_r700/host/include
+
+Name: blkid
+Description: Block device id library
+Version: 2.36.2
+Cflags: -I${includedir}/blkid
+Libs: -L${libdir} -lblkid

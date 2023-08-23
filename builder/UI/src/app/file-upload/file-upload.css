@@ -1,0 +1,58 @@
+:host{
+  width: 98%;
+  height: 470px;
+  box-sizing: border-box;
+}
+
+h2{
+  margin: 5px;
+}
+
+.file-input {
+    display: none;
+  }
+
+.file-upload {
+  width: 100%;
+  height: 100%;
+}
+
+.file-upload-instruction{
+  height: 20%;
+}
+
+.btn-cancel{
+  bottom: 0px;
+}
+
+.building-options{
+  margin: 10px;
+}
+
+.progress-section{
+  margin: 5px;
+}
+
+.mat-card-setting{
+  background-color: #C43A0333;
+  width: 100%;
+  height: 48%;
+  margin-bottom: 5px;
+}
+
+.mat-card-upload{
+  background-color: #C43A0333;
+  width: 100%;
+  height: 48%;
+  margin-bottom: 5px;
+}
+
+mat-slide-toggle{
+  margin-right: 5px;
+}
+
+mat-card-header{
+  margin-bottom: 10px;
+  border-style: none none solid none;
+  border-color: #C43A0333;
+}

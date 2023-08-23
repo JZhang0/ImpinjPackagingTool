@@ -1,0 +1,104 @@
+#############################################################################
+#                                                                           #
+#              IMPINJ CONFIDENTIAL AND PROPRIETARY                          #
+#                                                                           #
+# This source code is the sole property of Impinj, Inc. Reproduction or     #
+# utilization of this source code in whole or in part is forbidden without  #
+# the prior written consent of Impinj, Inc.                                 #
+#                                                                           #
+# (c) Copyright Impinj, Inc. 2007,2008. All rights reserved.                #
+#                                                                           #
+#############################################################################
+
+
+0) Building
+
+The llrpdef archive builds with maven.  The build should complete and install
+in your local archive with 
+
+mvn install
+
+There are a few steps to the build
+1) validate -- ensure the def.xml files are valid against their llrdef.xsd
+2) compile -- create the impinj.xsd and impinjInternal.xsd files
+3) test -- validate the xsd files are well-formed 
+	-- validate the sample XML files validate against the schemas
+4) package -- make the archive files (4 total)
+5) install -- install into your local maven repository
+
+When changing the def files to add new extensions, it may be a good
+idea to add some sample XML files to test the llrpdef package.  Just
+add a new xml file to the Impinj.com/SampleXML directory.
+
+NOTE:
+	For developer.impinj.com, it is an external server.  To log into it, use the username ltk and the password sp33dway.
+	If you need root access, the root password is h0stth15
+	If you need to access the account itself, go to www.vpslink.com.  The username is bebxwavz and the password is h0stth15
+
+
+1) post the new XML schema to developer.impinj.com
+
+	Base directory is on developer.impinj.com at
+
+	/home/ltk/pub_html/schema/encoding/xml
+
+	you need to make a new folder for the release (e.g. 1.6)
+	In that folder, you need the impinj.xsd.  For the sake
+	of compatibility, this file should be all lower case
+
+	You also need an index.html page that matches this template
+
+	<html>
+	<head>
+	<title>LLRP Toolkit XML Encoding of Impinj Vendor Extensions</title>
+	</head>
+	<body>
+	<h1>LLRP Toolkit XML Encoding of Impinj Vendor Extensions </h1>
+	You can find the 1.6 version of the LLRP Toolkit Impinj XML encoding W3C Schema
+	<a href="https://developer.impinj.com/ltk/schema/encoding/xml/1.6/impinj.xsd">Here</a><br><br>
+	Details on the LLRP Toolkit project can be found at <a href="http://llrp-toolkit.sourceforge.net">LLRP Toolkit</a><br><br>
+	</body>
+	</html>
+
+2) post the new internal XML schema to internal.impinj.com
+
+	Base directory is on internal.impinj.com at
+
+	\\sun\websites\www_internal\RFID\Engineering\LLRP\LTK\schema\encoding\xml
+
+	you need to make a new folder for the release (e.g. 1.6)
+	In that folder, you need the impinjInternal.xsd.  For the
+    sake of compatibility, this file should be all lower case
+
+	You also need an index.html page that matches this template
+
+	<html>
+	<head>
+	<title>LLRP Toolkit XML Encoding of Internal Impinj Vendor Extensions</title>
+	</head>
+	<body>
+	<h1>LLRP Toolkit XML Encoding of Impinj Internal Vendor Extensions </h1>
+	You can find the 1.6 version of the LLRP Toolkit Impinj XML encoding W3C Schema
+	<a href="http://internal.impinj.com/RFID/Engineering/LLRP/ltk/schema/encoding/xml/1.6/impinjInternal.xsd">Here</a><br><br>
+	Details on the LLRP Toolkit project can be found at <a href="http://llrp-toolkit.sourceforge.net">LLRP Toolkit</a><br><br>
+	</body>
+	</html>
+
+3) Post the new XML files to the internal packet decoder
+
+	Decoder is on sqa at /mnt/lvm1/home/sqa/tools 
+	Need to update xml at /mnt/lvm1/home/sqa/perlrp/RFID/LLRP 
+	There is no need to restart any processes or servers
+	If we make any changes to PerlRP, need to update that as well.
+
+4) Some of the toolkits have online documents.  When the LTK
+	releases, the online documentation is available internally at
+	
+	Update Page
+
+	\\Sun\websites\www_internal\RFID\Engineering\LLRP\index.html
+		to point to new documentation
+
+	Add new documentation releases e.g.
+
+	\\Sun\websites\www_internal\RFID\Engineering\LLRP\LTK\LTKCPP\10.6.0

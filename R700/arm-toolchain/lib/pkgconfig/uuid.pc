@@ -1,0 +1,11 @@
+prefix=/mnt/work/output/etk_r700/host
+exec_prefix=/mnt/work/output/etk_r700/host
+libdir=/mnt/work/output/etk_r700/host/lib
+includedir=/mnt/work/output/etk_r700/host/include
+
+Name: uuid
+Description: Universally unique id library
+Version: 2.36.2
+Requires:
+Cflags: -I${includedir}/uuid
+Libs: -L${libdir} -luuid

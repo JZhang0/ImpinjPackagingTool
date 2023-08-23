@@ -1,0 +1,42 @@
+#!/bin/bash
+
+### BEGIN INIT INFO
+# Provides:          ImpinjBuilder
+# Required-Start:    $network $syslog $remote_fs
+# Required-Stop:     
+# Default-Start:     2 3 4 5
+# Default-Stop:      
+# Short-Description: Server to build Impinj UPGX package
+### END INIT INFO
+
+start() {
+    ~/ImpinjBuilder/server/server > ~/ImpinjBuilder/Server.log 2> ~/ImpinjBuilder/Server.err &
+    echo "Impinj Builder Server Started"
+
+    /usr/local/bin/http-server ~/ImpinjBuilder/UI/ -p 80 > ~/ImpinjBuilder/UI.log 2> ~/ImpinjBuilder/UI.err &
+    echo "Impinj Builder Web Interface Started"
+}
+
+stop() {
+    pkill http-server
+    pkill -f ~/ImpinjBuilder/server/server
+}
+
+case "$1" in 
+    start)
+       start
+       ;;
+    stop)
+       stop
+       ;;
+    restart)
+       stop
+       start
+       ;;
+    status)
+       cat ~/ImpinjBuilder/Server.log
+       cat ~/ImpinjBuilder/UI.log
+       ;;
+    *)
+       echo "Usage: $0 {start|stop|status|restart}"
+esac

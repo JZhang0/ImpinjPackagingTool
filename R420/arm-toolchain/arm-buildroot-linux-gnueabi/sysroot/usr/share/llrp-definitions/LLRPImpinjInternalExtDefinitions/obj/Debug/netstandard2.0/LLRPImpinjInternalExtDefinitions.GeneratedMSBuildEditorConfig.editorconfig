@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = LLRPImpinjInternalExtDefinitions
+build_property.ProjectDir = /home/user/impinj/R420/arm-toolchain/arm-buildroot-linux-gnueabi/sysroot/usr/share/llrp-definitions/LLRPImpinjInternalExtDefinitions/

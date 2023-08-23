@@ -1,0 +1,11 @@
+prefix=/mnt/work/output/etk_r700/host
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: expat
+Version: 2.4.5
+Description: expat XML parser
+URL: https://libexpat.github.io/
+Libs: -L${libdir} -lexpat -lm
+Cflags: -I${includedir}

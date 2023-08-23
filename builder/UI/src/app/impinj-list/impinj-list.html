@@ -1,0 +1,19 @@
+<h2>Choose an Impinj Device</h2>
+
+<mat-grid-list class="grid-list" cols="2" rowHeight="fit" gutterSize="5px">
+    <div *ngFor="let device of devices">
+        <mat-grid-tile>
+
+            <mat-grid-tile-header 
+                [style.background]="'#C43A03'"
+                *ngIf="device.description">
+                {{device.description}}
+            </mat-grid-tile-header>
+
+            <file-upload deviceType={{device.name}} (buildComplete)="buildButtonDisabled = $event"></file-upload>
+
+            <button class="build-button" type="button" [disabled] = buildButtonDisabled (click)="build(device.name)">Build</button>
+
+        </mat-grid-tile>
+    </div>
+</mat-grid-list>
